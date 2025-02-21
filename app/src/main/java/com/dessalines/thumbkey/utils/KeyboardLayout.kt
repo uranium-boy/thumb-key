@@ -135,6 +135,7 @@ import com.dessalines.thumbkey.keyboards.KB_JA_KANA_THUMBKEY
 import com.dessalines.thumbkey.keyboards.KB_JA_KATAKANA_THUMBKEY
 import com.dessalines.thumbkey.keyboards.KB_JA_KATAKANA_TYPESPLIT
 import com.dessalines.thumbkey.keyboards.KB_KA_THUMBKEY
+import com.dessalines.thumbkey.keyboards.KB_KR_TYPESPLIT
 import com.dessalines.thumbkey.keyboards.KB_KZ_THUMBKEY
 import com.dessalines.thumbkey.keyboards.KB_LT_THUMBKEY
 import com.dessalines.thumbkey.keyboards.KB_LV_LTG_THUMBKEY
@@ -356,4 +357,5 @@ enum class KeyboardLayout(
     ENESCAENTwoHands(KB_EN_ES_CA_TWO_HANDS),
     DEThumbKeyWords(KB_DE_THUMBKEY_WORDS),
     RUMessageOwl(KB_RU_MESSAGE_OWL),
+    KRTypeSplit(KB_KR_TYPESPLIT),
 }
