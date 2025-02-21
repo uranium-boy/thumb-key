@@ -388,4 +388,5 @@ enum class KeyboardLayout(
     RUArti(KB_RU_ARTI),
     DAThumbKeyMultiLingual(KB_DA_THUMBKEY_MULTILINGUAL),
     ENSymbolsNumbersArrowsTwoHandsCompact(KB_EN_SYMBOLS_NUMBERS_ARROWS_TWO_HANDS_COMPACT),
+    KRTypeSplit(KB_KR_TYPESPLIT),
 }
