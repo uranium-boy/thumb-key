@@ -342,10 +342,15 @@ fun performKeyAction(
             val text = action.text
             Log.d(TAG, "committing key text: $text")
             ime.ignoreNextCursorMove()
-            ime.currentInputConnection.commitText(
-                text,
-                1,
-            )
+
+            if (ime.layoutName == "한국어 type-split") {
+                ime.koreanComposer.processKoreanText(ime, text)
+            } else {
+                ime.currentInputConnection.commitText(
+                    text,
+                    1,
+                )
+            }
 
             if (autoCapitalize) {
                 autoCapitalize(
@@ -361,7 +366,11 @@ fun performKeyAction(
         is KeyAction.SendEvent -> {
             val ev = action.event
             Log.d(TAG, "sending key event: $ev")
-            ime.currentInputConnection.sendKeyEvent(ev)
+            if (ime.layoutName == "한국어 type-split") {
+                ime.koreanComposer.sendKeyEvent(ev, ime)
+            } else {
+                ime.currentInputConnection.sendKeyEvent(ev)
+            }
             onKeyEvent()
         }
 
