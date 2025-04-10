@@ -16,8 +16,6 @@ import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
-import com.dessalines.thumbkey.utils.KeyboardLayout
-import com.dessalines.thumbkey.utils.KoreanComposer
 import com.dessalines.thumbkey.utils.TAG
 
 class IMEService :
@@ -27,7 +25,6 @@ class IMEService :
     SavedStateRegistryOwner {
     private fun setupView(): View {
         val settingsRepo = (application as ThumbkeyApplication).appSettingsRepository
-        layoutName = settingsRepo.appSettings.value?.keyboardLayout?.let { KeyboardLayout.entries[it].keyboardDefinition.title }
 
         val view = ComposeKeyboardView(this, settingsRepo)
         window?.window?.decorView?.let { decorView ->
@@ -78,22 +75,11 @@ class IMEService :
     override fun onUpdateCursorAnchorInfo(cursorAnchorInfo: CursorAnchorInfo) {
         super.onUpdateCursorAnchorInfo(cursorAnchorInfo)
 
-/*
-        if (layoutName == "한국어 type-split") {
-            currentInputConnection.finishComposingText()
-            koreanComposer.resetState()
-        }
-*/
-
         cursorMoved =
             if (ignoreCursorMove) {
                 ignoreCursorMove = false
                 false
             } else {
-                if (layoutName == "한국어 type-split") {
-                    currentInputConnection.finishComposingText()
-                    koreanComposer.resetState()
-                }
                 Log.d(TAG, "cursor moved")
                 cursorAnchorInfo.selectionStart != selectionStart ||
                     cursorAnchorInfo.selectionEnd != selectionEnd
@@ -119,10 +105,7 @@ class IMEService :
     override val viewModelStore = ViewModelStore()
 
     // SaveStateRegistry Methods
-
     private val savedStateRegistryController = SavedStateRegistryController.create(this)
     override val savedStateRegistry: SavedStateRegistry =
         savedStateRegistryController.savedStateRegistry
-    var layoutName: String? = null
-    val koreanComposer = KoreanComposer()
 }
